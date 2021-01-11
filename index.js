@@ -31,46 +31,15 @@ const getMatches = async (team1Id, team2Id) => {
             console.log('Match ' + match.matchId + ' ' + match.clubs[team1Id].details.name + ' vs ' + match.clubs[team2Id].details.name)
 
             for (const teamId in match.players) {
-                console.log(line)
-                console.log(match.clubs[teamId].details.name + ' players')
-                console.log(line)
 
                 const teamPlayers = match.players[teamId]
                 const matchStats = []
-                const ws = fs.createWriteStream(match.matchId+"-"+match.clubs[team1Id].details.name+"v" + match.clubs[team2Id].details.name +".csv");
+                const ws = fs.createWriteStream(match.matchId+"-"+match.clubs[team1Id].details.name+ " vs " + match.clubs[team2Id].details.name +".csv");
 
 
                 for (const playerId in teamPlayers){
 
                     var player = teamPlayers[playerId]
-                    console.log(
-                        player.playername,
-                        player.glsaves,
-                        player.glgaa,
-                        player.skgoals,
-                        player.skassists,
-                        player.skhits,
-                        player.skpim,
-                        player.skgiveaways,
-                        player.sktakeaways,
-                        player.skpasses,
-                        player.skpassattempts,
-                        player.skinterceptions,
-                        player.skppg,
-                        player.skshg,
-                        player.skgwg,
-                        player.ratingOffense,
-                        player.ratingDefense,
-                        player.ratingTeamplay,
-                        player.position,
-                        player.skplusmin,
-                        player.skpkclearzone,
-                        player.skpenaltiesdrawn,
-                        player.skfow,
-                        player.skfol,
-                        player.skpossession,
-                        player.skbs,
-                        player.skdeflections)
 
                         matchStats.push({
                             playername: player.playername,
@@ -144,7 +113,3 @@ const team2 = enemyTeams[team2Index]
 console.log(`\nYou selected ${team1.name} vs ${team2.name}`)
 
 getMatches(team1.teamId, team2.teamId)
-
-
-
-//getMatches()
