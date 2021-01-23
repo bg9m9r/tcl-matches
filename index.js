@@ -28,60 +28,59 @@ const getMatches = async (team1Id, team2Id) => {
         data
         .filter(match => match.clubs[team2Id])
         .map(match => {
-            console.log('Match ' + match.matchId + ' ' + match.clubs[team1Id].details.name + ' vs ' + match.clubs[team2Id].details.name)
-
+            
             for (const teamId in match.players) {
 
                 const teamPlayers = match.players[teamId]
                 const matchStats = []
-                const ws = fs.createWriteStream(match.matchId+"-"+match.clubs[team1Id].details.name+ " vs " + match.clubs[team2Id].details.name +".csv");
-
+                const ws = fs.createWriteStream(match.matchId + " - " + match.clubs[teamId].details.name + ".csv")
 
                 for (const playerId in teamPlayers){
 
                     var player = teamPlayers[playerId]
 
-                        matchStats.push({
-                            playername: player.playername,
-                            skgoals: player.skgoals, 
-                            skassists: player.skassists,
-                            glsaves: player.glsaves,
-                            glgaa: player.glgaa,
-                            skshots: player.skshots,
-                            skhits: player.skhits, 
-                            skpim: player.skpim, 
-                            skgiveaways: player.skgiveaways, 
-                            sktakeaways: player.sktakeaways, 
-                            skpasses: player.skpasses, 
-                            skpassattempts: player.skpassattempts, 
-                            skinterceptions: player.skinterceptions, 
-                            skppg: player.skppg, 
-                            skshg: player.skshg, 
-                            skgwg: player.skgwg, 
-                            ratingOffense: player.ratingOffense, 
-                            ratingDefense: player.ratingDefense, 
-                            ratingTeamplay: player.ratingTeamplay, 
-                            position: player.position, 
-                            skplusmin: player.skplusmin, 
-                            skpkclearzone: player.skpkclearzone, 
-                            skpenaltiesdrawn: player.skpenaltiesdrawn, 
-                            skfow: player.skfow, 
-                            skfol: player.skfol, 
-                            skpossession: player.skpossession, 
-                            skbs: player.skbs, 
-                            skdeflections: player.skdeflections, 
-                            glshots: player.glshots, 
-                            glsavepct: player.glsavepct, 
-                            glbrkshots: player.glbrkshots, 
-                            glbrksaves: player.glbrksaves, 
-                            gldsaves: player.gldsaves
-                        })
+                    matchStats.push({
+                        playername: player.playername,
+                        skgoals: player.skgoals, 
+                        skassists: player.skassists,
+                        glsaves: player.glsaves,
+                        glgaa: player.glgaa,
+                        skshots: player.skshots,
+                        skhits: player.skhits, 
+                        skpim: player.skpim, 
+                        skgiveaways: player.skgiveaways, 
+                        sktakeaways: player.sktakeaways, 
+                        skpasses: player.skpasses, 
+                        skpassattempts: player.skpassattempts, 
+                        skinterceptions: player.skinterceptions, 
+                        skppg: player.skppg, 
+                        skshg: player.skshg, 
+                        skgwg: player.skgwg, 
+                        ratingOffense: player.ratingOffense, 
+                        ratingDefense: player.ratingDefense, 
+                        ratingTeamplay: player.ratingTeamplay, 
+                        position: player.position, 
+                        skplusmin: player.skplusmin, 
+                        skpkclearzone: player.skpkclearzone, 
+                        skpenaltiesdrawn: player.skpenaltiesdrawn, 
+                        skfow: player.skfow, 
+                        skfol: player.skfol, 
+                        skpossession: player.skpossession, 
+                        skbs: player.skbs, 
+                        skdeflections: player.skdeflections, 
+                        glshots: player.glshots, 
+                        glsavepct: player.glsavepct, 
+                        glbrkshots: player.glbrkshots, 
+                        glbrksaves: player.glbrksaves, 
+                        gldsaves: player.gldsaves
+                    })
                 }
                 // write
                 fastcsv
                 .write(matchStats, { headers: true })
-                .pipe(ws); 
-                
+                .pipe(ws)
+
+                console.log('File created: ' + match.matchId + " - " + match.clubs[teamId].details.name + ".csv")
             }
         })
 
