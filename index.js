@@ -3,20 +3,9 @@ const fastcsv = require('fast-csv');
 const fs = require('fs');
 const readlineSync = require('readline-sync')
 
-const teams = [
-    { teamId: 212913, name: 'Yale' },
-    { teamId: 299408, name: 'Harvard' },
-    { teamId: 207396, name: 'Notre Dame' },
-    { teamId: 251658, name: 'Wisconsin' },
-    { teamId: 209340, name: 'Denver' },
-    { teamId: 294582, name: 'Michigan' },
-    { teamId: 231072, name: 'Penn State' },
-    { teamId: 323453, name: 'Boston University' },
-]
 
+var teams = []
 const line = '\n------------------------\n'
-
-
 
 
 const getMatches = async (team1Id, team2Id) => {
@@ -90,12 +79,37 @@ const getMatches = async (team1Id, team2Id) => {
     }
 }
 
+const loadConfig = () => {
+
+    if(!fs.existsSync('./configs/config.json')) {
+        console.log('no config found')
+        writeConfig()
+    }
+        
+    var config = JSON.parse(fs.readFileSync('./configs/config.json', 'utf8'))
+    teams = JSON.parse(fs.readFileSync('./configs/' + config.league + '.json', 'utf8'))
+
+}
+
+const writeConfig = () => {
+    console.log('Which league do you want to export data for?')
+    
+    var leagues = fs.readdirSync('./configs').map(league => league.replace('.json', ''))
+    var leagueIndex = readlineSync.keyInSelect(leagues, 'League', { cancel: false })
+    fs.writeFileSync('./configs/config.json', JSON.stringify({ league: leagues[leagueIndex]}))
+}
+
+/****************************************************************************************************************** */
+
+
 //start
 console.clear()
 
 console.log(line)
 console.log('TCL Hockey Stat Exporter');
 console.log(line)
+
+loadConfig()
 
 console.log('Pick team 1')
 var team1Index = readlineSync.keyInSelect(teams.map(team => team.name), 'Team 1?', { cancel: false })

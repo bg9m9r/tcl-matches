@@ -1,3 +1,7 @@
+# Project specific
+config.json
+*.csv
+
 # Logs
 logs
 *.log
@@ -114,6 +118,3 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-# csvs
-*.csv
