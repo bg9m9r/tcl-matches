@@ -22,7 +22,7 @@ const getMatches = async (team1Id, team2Id) => {
 
                 const teamPlayers = match.players[teamId]
                 const matchStats = []
-                const ws = fs.createWriteStream(match.matchId + " - " + match.clubs[teamId].details.name + ".csv")
+                const ws = fs.createWriteStream('./stats/' + match.matchId + " - " + match.clubs[teamId].details.name + ".csv")
 
                 for (const playerId in teamPlayers){
 
