@@ -1,10 +1,11 @@
 [
-  { "teamId": 212913, "name": "Yale" },
+  { "teamId": 366319, "name": "North Dakota" },
   { "teamId": 299408, "name": "Harvard" },
   { "teamId": 207396, "name": "Notre Dame" },
   { "teamId": 251658, "name": "Wisconsin" },
   { "teamId": 209340, "name": "Denver" },
   { "teamId": 294582, "name": "Michigan" },
   { "teamId": 231072, "name": "Penn State" },
-  { "teamId": 323453, "name": "Boston University" }
+  { "teamId": 323453, "name": "Boston University" },
+  { "teamId": 365002 , "name": "Minnesota" }
 ]
