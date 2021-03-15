@@ -1,0 +1,21 @@
+[ 
+    { "name": "Carolina", "teamId": 208029 },
+    { "name": "Anaheim", "teamId": 376149 },
+    { "name": "Boston", "teamId": 370818 },
+    { "name": "Buffalo", "teamId": 372849 },
+    { "name": "Calgary", "teamId": 372249 },
+    { "name": "Chicago", "teamId": 99279 },
+    { "name": "Colorado", "teamId": 178950 },
+    { "name": "Columbus", "teamId": 373278 },
+    { "name": "Dallas", "teamId": 372351 },
+    { "name": "Detroit", "teamId": 371190 },
+    { "name": "Edmonton", "teamId": 253893 },
+    { "name": "Florida", "teamId": 374493 },
+    { "name": "Golden Knights", "teamId": 372291 },
+    { "name": "LA", "teamId": 357841 },
+    { "name": "Minnesota", "teamId": 367573 },
+    { "name": "Philadelphia", "teamId": 382296 },
+    { "name": "Toronto", "teamId": 5235 },
+    { "name": "Washington", "teamId": 417180 },
+    { "name": "Winnipeg", "teamId": 374382 }
+]
