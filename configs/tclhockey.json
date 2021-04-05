@@ -1,11 +1,9 @@
 [
-  { "teamId": 366319, "name": "North Dakota" },
-  { "teamId": 299408, "name": "Harvard" },
-  { "teamId": 207396, "name": "Notre Dame" },
-  { "teamId": 251658, "name": "Wisconsin" },
-  { "teamId": 209340, "name": "Denver" },
+  { "teamId": 495274, "name": "Bowling Green" },
+  { "teamId": 299408, "name": "Maine" },
+  { "teamId": 485908, "name": "Nebraska Omaha" },
   { "teamId": 294582, "name": "Michigan" },
-  { "teamId": 231072, "name": "Penn State" },
-  { "teamId": 323453, "name": "Boston University" },
+  { "teamId": 467164, "name": "Penn State" },
+  { "teamId": 484411, "name": "Boston College" },
   { "teamId": 365002 , "name": "Minnesota" }
 ]
