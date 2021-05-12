@@ -44,6 +44,7 @@ const getMatches = async (team1Id, team2Id) => {
 
                     matchStats.push({
                         playername: player.playername,
+                        position: positions[player.position],
                         skgoals: player.skgoals, 
                         skassists: player.skassists,
                         glsaves: player.glsaves,
@@ -61,8 +62,7 @@ const getMatches = async (team1Id, team2Id) => {
                         skgwg: player.skgwg, 
                         ratingOffense: player.ratingOffense, 
                         ratingDefense: player.ratingDefense, 
-                        ratingTeamplay: player.ratingTeamplay, 
-                        position: positions[player.position], 
+                        ratingTeamplay: player.ratingTeamplay,
                         skplusmin: player.skplusmin, 
                         skpkclearzone: player.skpkclearzone, 
                         skpenaltiesdrawn: player.skpenaltiesdrawn, 
