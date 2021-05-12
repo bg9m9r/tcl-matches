@@ -28,6 +28,12 @@ const getMatches = async (team1Id, team2Id) => {
 
                     var player = teamPlayers[playerId]
 
+                    var skaterPos = player.position !== 'goalie' ? 1 : 0
+                    var goaliePos = skaterPos === 0 ? 1 : 0
+                    var centerPos = player.position === 'center' ? 1 : 0
+                    var wingPos = player.position === 'leftWing' || player.position === 'rightWing' ? 1 : 0
+                    var defPos = player.position === 'defenseMen' ? 1 : 0
+
                     matchStats.push({
                         playername: player.playername,
                         skgoals: player.skgoals, 
@@ -61,7 +67,12 @@ const getMatches = async (team1Id, team2Id) => {
                         glsavepct: player.glsavepct, 
                         glbrkshots: player.glbrkshots, 
                         glbrksaves: player.glbrksaves, 
-                        gldsaves: player.gldsaves
+                        gldsaves: player.gldsaves,
+                        sgp: skaterPos,
+                        ggp: goaliePos,
+                        cgp: centerPos,
+                        wgp: wingPos,
+                        dgp: defPos
                     })
                 }
                 // write
