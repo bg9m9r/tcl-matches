@@ -7,6 +7,14 @@ const readlineSync = require('readline-sync')
 var teams = []
 const line = '\n------------------------\n'
 
+var positions = {
+    "leftWing": "LW",
+    "center": "C",
+    "rightWing": "RW",
+    "defenseMen": "D",
+    "goalie": "G"
+}
+
 
 const getMatches = async (team1Id, team2Id) => {
     try {
@@ -54,7 +62,7 @@ const getMatches = async (team1Id, team2Id) => {
                         ratingOffense: player.ratingOffense, 
                         ratingDefense: player.ratingDefense, 
                         ratingTeamplay: player.ratingTeamplay, 
-                        position: player.position, 
+                        position: positions[player.position], 
                         skplusmin: player.skplusmin, 
                         skpkclearzone: player.skpkclearzone, 
                         skpenaltiesdrawn: player.skpenaltiesdrawn, 
