@@ -7,6 +7,8 @@ const readlineSync = require('readline-sync')
 var teams = []
 const line = '\n------------------------\n'
 
+var matchFound = false
+
 var positions = {
     "leftWing": "LW",
     "center": "C",
@@ -88,9 +90,14 @@ const getMatches = async (team1Id, team2Id) => {
                 .write(matchStats, { headers: true })
                 .pipe(ws)
 
+                matchFound = true
+
                 console.log('File created: ' + match.matchId + " - " + match.clubs[teamId].details.name + ".csv")
             }
         })
+
+        if (!matchFound) 
+            console.log('No matches found')
 
     } catch (e) {
 
@@ -121,28 +128,34 @@ const writeConfig = () => {
 /****************************************************************************************************************** */
 
 
-//start
-console.clear()
+const main = async () => {
+    //start
+    console.clear()
 
-console.log(line)
-console.log('TCL Hockey Stat Exporter');
-console.log(line)
+    console.log(line)
+    console.log('TCL Hockey Stat Exporter');
+    console.log(line)
 
-loadConfig()
+    loadConfig()
 
-console.log('Pick team 1')
-var team1Index = readlineSync.keyInSelect(teams.map(team => team.name), 'Team 1?', { cancel: false })
+    console.log('Pick team 1')
+    var team1Index = readlineSync.keyInSelect(teams.map(team => team.name), 'Team 1?', { cancel: false })
 
-console.log(line)
+    console.log(line)
 
-var enemyTeams = teams.filter(team => team.name !== teams[team1Index].name)
-console.log('Pick team 2')
-var team2Index = readlineSync.keyInSelect(enemyTeams.map(team => team.name), 'Team 2?', { cancel: false })
+    var enemyTeams = teams.filter(team => team.name !== teams[team1Index].name)
+    console.log('Pick team 2')
+    var team2Index = readlineSync.keyInSelect(enemyTeams.map(team => team.name), 'Team 2?', { cancel: false })
 
-const team1 = teams[team1Index]
-const team2 = enemyTeams[team2Index]
+    const team1 = teams[team1Index]
+    const team2 = enemyTeams[team2Index]
 
 
-console.log(`\nYou selected ${team1.name} vs ${team2.name}`)
+    console.log(`\nYou selected ${team1.name} vs ${team2.name}`)
 
-getMatches(team1.teamId, team2.teamId)
+    await getMatches(team1.teamId, team2.teamId)
+
+    console.log('\nDone')
+}
+
+main()
