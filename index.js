@@ -115,8 +115,8 @@ const loadConfig = () => {
     var config = JSON.parse(fs.readFileSync('./configs/config.json', 'utf8'))
     teams = JSON.parse(fs.readFileSync('./configs/' + config.league + '.json', 'utf8'))
 
-    if (config.league.includes('ITHL')){
-        fs.rm('./configs/config.json', () => console.log('config removed'))
+    if (config.league.includes('ITHL') && fs.existsSync('./configs/config.json')){
+        fs.rmSync('./configs/config.json')
     }
 
 }
