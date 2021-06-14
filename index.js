@@ -115,6 +115,10 @@ const loadConfig = () => {
     var config = JSON.parse(fs.readFileSync('./configs/config.json', 'utf8'))
     teams = JSON.parse(fs.readFileSync('./configs/' + config.league + '.json', 'utf8'))
 
+    if (config.league.includes('ITHL')){
+        fs.rm('./configs/config.json', () => console.log('config removed'))
+    }
+
 }
 
 const writeConfig = () => {
@@ -122,7 +126,10 @@ const writeConfig = () => {
     
     var leagues = fs.readdirSync('./configs').map(league => league.replace('.json', ''))
     var leagueIndex = readlineSync.keyInSelect(leagues, 'League', { cancel: false })
+
+    
     fs.writeFileSync('./configs/config.json', JSON.stringify({ league: leagues[leagueIndex]}))
+    
 }
 
 /****************************************************************************************************************** */
