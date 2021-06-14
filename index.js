@@ -118,6 +118,8 @@ const loadConfig = () => {
         fs.rmSync('./configs/config.json')
         console.log('no config found')
         writeConfig()
+
+        config = JSON.parse(fs.readFileSync('./configs/config.json', 'utf8'))
     }
 
     teams = JSON.parse(fs.readFileSync('./configs/' + config.league + '.json', 'utf8'))
