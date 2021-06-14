@@ -113,6 +113,13 @@ const loadConfig = () => {
     }
         
     var config = JSON.parse(fs.readFileSync('./configs/config.json', 'utf8'))
+
+    if(!fs.existsSync('./configs/' + config.league + '.json')){
+        fs.rmSync('./configs/config.json')
+        console.log('no config found')
+        writeConfig()
+    }
+
     teams = JSON.parse(fs.readFileSync('./configs/' + config.league + '.json', 'utf8'))
 
     if (config.league.includes('ITHL') && fs.existsSync('./configs/config.json')){
