@@ -89,6 +89,7 @@ const getMatches = async (team1Id, team2Id) => {
                 fastcsv
                 .write(matchStats, { headers: true })
                 .pipe(ws)
+                .catch(e => console.log(e,'hey'))
 
                 matchFound = true
 
@@ -107,8 +108,19 @@ const getMatches = async (team1Id, team2Id) => {
 
 const loadConfig = () => {
 
-    if(!fs.existsSync('./configs/config.json')) {
-        console.log('no config found')
+    try
+    {
+        if(!fs.existsSync('./configs/config.json')) {
+            console.log('no config found')
+            writeConfig()
+        }
+            
+        var config = JSON.parse(fs.readFileSync('./configs/config.json', 'utf8'))
+        teams = JSON.parse(fs.readFileSync('./configs/' + config.league + '.json', 'utf8'))
+    }
+    catch (e)
+    {
+        console.log(e)
         writeConfig()
     }
         
