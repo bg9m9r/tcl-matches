@@ -89,7 +89,6 @@ const getMatches = async (team1Id, team2Id) => {
                 fastcsv
                 .write(matchStats, { headers: true })
                 .pipe(ws)
-                .catch(e => console.log(e,'hey'))
 
                 matchFound = true
 
