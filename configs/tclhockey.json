@@ -1,9 +1,17 @@
 [
-  { "teamId": 495274, "name": "Bowling Green" },
-  { "teamId": 299408, "name": "Maine" },
+  { "teamId": 592951, "name": "NMU" },
+  { "teamId": 470320, "name": "Maine" },
   { "teamId": 485908, "name": "Nebraska Omaha" },
   { "teamId": 294582, "name": "Michigan" },
+  { "teamId": 603652, "name": "BU" },
+  { "teamId": 484411, "name": "BC" },
+  { "teamId": 564058, "name": "Alaska" },
+  { "teamId": 584236, "name": "Wisconsin" },
+  { "teamId": 495274, "name": "BGSU" },
+  { "teamId": 595027, "name": "ND" },
+  { "teamId": 488188, "name": "MSU" },
+  { "teamId": 566050, "name": "MN State" },
+  { "teamId": 566197, "name": "Ohio State" },
   { "teamId": 467164, "name": "Penn State" },
-  { "teamId": 484411, "name": "Boston College" },
   { "teamId": 365002 , "name": "Minnesota" }
 ]
