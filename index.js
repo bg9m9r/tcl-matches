@@ -24,8 +24,6 @@ const getMatches = async (team1Id, team2Id) => {
         const res = await axios.get(uri, {headers: {'Referer': 'www.ea.com'}, })
         const data = res.data
 
-        console.log(uri)
-
         data
         .filter(match => match.clubs[team2Id])
         .map(match => {
