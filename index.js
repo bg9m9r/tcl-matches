@@ -5,6 +5,7 @@ const readlineSync = require('readline-sync')
 
 
 var teams = []
+var platform = ''
 const line = '\n------------------------\n'
 
 var matchFound = false
@@ -17,12 +18,13 @@ var positions = {
     "goalie": "G"
 }
 
-
 const getMatches = async (team1Id, team2Id) => {
     try {
-        const uri = `https://proclubs.ea.com/api/nhl/clubs/matches?clubIds=${team1Id}&platform=ps4&matchType=club_private`
+        const uri = `https://proclubs.ea.com/api/nhl/clubs/matches?clubIds=${team1Id}&platform=${platform}&matchType=club_private`
         const res = await axios.get(uri, {headers: {'Referer': 'www.ea.com'}, })
         const data = res.data
+
+        console.log(uri)
 
         data
         .filter(match => match.clubs[team2Id])
@@ -133,7 +135,10 @@ const loadConfig = () => {
         config = JSON.parse(fs.readFileSync('./configs/config.json', 'utf8'))
     }
 
-    teams = JSON.parse(fs.readFileSync('./configs/' + config.league + '.json', 'utf8'))
+    var league = JSON.parse(fs.readFileSync('./configs/' + config.league + '.json', 'utf8'))
+
+    teams = league.Teams
+    platform = league.Platform
 
     if (config.league.includes('ITHL') && fs.existsSync('./configs/config.json')){
         fs.rmSync('./configs/config.json')
