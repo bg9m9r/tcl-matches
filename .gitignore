@@ -2,6 +2,7 @@
 config.json
 *.csv
 configs/
+.DS_Store
 
 # Logs
 logs
