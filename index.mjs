@@ -90,7 +90,7 @@ const getMatches = async (team1Id, team2Id) => {
                     })
                 }
                 // write
-                fastcsv
+                csv
                 .write(matchStats, { headers: true })
                 .pipe(ws)
 
