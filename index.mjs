@@ -1,8 +1,10 @@
-const axios = require('axios').default;
-const fastcsv = require('fast-csv');
-const fs = require('fs');
-const readlineSync = require('readline-sync')
-
+import axios from 'axios';
+import { clear }  from "console";
+import * as csv from 'fast-csv';
+import fs  from "fs";
+import { cwd }  from "process";
+import * as readline from 'node:readline/promises';
+import { stdin as input, stdout as output } from 'node:process';
 
 var teams = []
 var platform = ''
@@ -17,6 +19,8 @@ var positions = {
     "defenseMen": "D",
     "goalie": "G"
 }
+
+
 
 const getMatches = async (team1Id, team2Id) => {
     try {
@@ -105,13 +109,13 @@ const getMatches = async (team1Id, team2Id) => {
     }
 }
 
-const loadConfig = () => {
+const loadConfig = async () => {
 
     try
     {
         if(!fs.existsSync('./configs/config.json')) {
             console.log('no config found')
-            writeConfig()
+            await writeConfig()
         }
             
         var config = JSON.parse(fs.readFileSync('./configs/config.json', 'utf8'))
@@ -120,18 +124,9 @@ const loadConfig = () => {
     catch (e)
     {
         console.log(e)
-        writeConfig()
     }
         
     var config = JSON.parse(fs.readFileSync('./configs/config.json', 'utf8'))
-
-    if(!fs.existsSync('./configs/' + config.league + '.json')){
-        fs.rmSync('./configs/config.json')
-        console.log('no config found')
-        writeConfig()
-
-        config = JSON.parse(fs.readFileSync('./configs/config.json', 'utf8'))
-    }
 
     var league = JSON.parse(fs.readFileSync('./configs/' + config.league + '.json', 'utf8'))
 
@@ -141,18 +136,43 @@ const loadConfig = () => {
     if (config.league.includes('ITHL') && fs.existsSync('./configs/config.json')){
         fs.rmSync('./configs/config.json')
     }
-
 }
 
-const writeConfig = () => {
-    console.log('Which league do you want to export data for?')
+const writeConfig = async () => {
+    console.log('Which league do you want to export data for?');
     
-    var leagues = fs.readdirSync('./configs').map(league => league.replace('.json', ''))
-    var leagueIndex = readlineSync.keyInSelect(leagues, 'League', { cancel: false })
+    var leagues = fs.readdirSync('./configs').map(league => league.replace('.json', ''));
 
-    
-    fs.writeFileSync('./configs/config.json', JSON.stringify({ league: leagues[leagueIndex]}))
-    
+    var leagueIndex = await promptForResponse('Pick a league', leagues);
+
+    fs.writeFileSync('./configs/config.json', JSON.stringify({ league: leagues[leagueIndex]}));
+}
+
+// returns the index from the response to the prompt
+const promptForResponse = async (question, list) => {
+
+    const rl = readline.createInterface({ input, output });
+    question = question + '\n> '
+
+    let index = 1;
+
+    list.forEach(item => {
+        console.log(index + '. ' + item);
+        index++;
+    });
+
+    const answer = await rl.question(question);
+
+    console.log(`you chose ${answer}`)
+
+    rl.close();
+
+    return answer-1;
+}
+
+// Remove element at the given index
+Array.prototype.remove = function(index) {
+    this.splice(index, 1);
 }
 
 /****************************************************************************************************************** */
@@ -163,21 +183,22 @@ const main = async () => {
     console.clear()
 
     console.log(line)
-    console.log('TCL Hockey Stat Exporter');
+    console.log('ITHL Stat Exporter');
     console.log(line)
 
-    loadConfig()
-
-    console.log('Pick team 1')
-    var team1Index = readlineSync.keyInSelect(teams.map(team => team.name), 'Team 1?', { cancel: false })
+    await loadConfig()
 
     console.log(line)
 
-    var enemyTeams = teams.filter(team => team.name !== teams[team1Index].name)
-    console.log('Pick team 2')
-    var team2Index = readlineSync.keyInSelect(enemyTeams.map(team => team.name), 'Team 2?', { cancel: false })
-
+    var team1Index = await promptForResponse("Pick the first club", teams.map(team => team.name))
     const team1 = teams[team1Index]
+    
+    
+    var enemyTeams = teams.filter(team => team.name !== teams[team1Index].name)
+
+    console.log(line)
+
+    var team2Index = await promptForResponse("Pick the second club", enemyTeams.map(team => team.name))
     const team2 = enemyTeams[team2Index]
 
 
@@ -188,4 +209,4 @@ const main = async () => {
     console.log('\nDone')
 }
 
-main()
+await main()
