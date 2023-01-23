@@ -163,8 +163,6 @@ const promptForResponse = async (question, list) => {
 
     const answer = await rl.question(question);
 
-    console.log(`you chose ${answer}`)
-
     rl.close();
 
     return answer-1;
