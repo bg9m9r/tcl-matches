@@ -34,9 +34,17 @@ const getMatches = async (team1Id, team2Id) => {
             
             for (const teamId in match.players) {
 
+                console.log('teamId',match.clubs[teamId])
+
                 const teamPlayers = match.players[teamId]
                 const matchStats = []
-                const ws = fs.createWriteStream('./stats/' + match.matchId + " - " + match.clubs[teamId].details.name + ".csv")
+                let clubName = "UNKNOWN";
+
+                if (match.clubs[teamId].details){
+                    clubName = match.clubs[teamId].details.name
+                }
+                
+                const ws = fs.createWriteStream('./stats/' + match.matchId + " - " + clubName + ".csv")
 
                 for (const playerId in teamPlayers){
 
@@ -96,7 +104,7 @@ const getMatches = async (team1Id, team2Id) => {
 
                 matchFound = true
 
-                console.log('File created: ' + match.matchId + " - " + match.clubs[teamId].details.name + ".csv")
+                console.log('File created: ' + match.matchId + " - " + clubName + ".csv")
             }
         })
 
