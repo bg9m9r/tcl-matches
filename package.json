@@ -1,8 +1,14 @@
 {
   "name": "tcl-matches",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.mjs",
+  "bin": "index.mjs",
+  "pkg": {
+    "targets": [
+      "node16"
+    ]
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.mjs"
@@ -13,6 +19,7 @@
     "axios": "^0.21.1",
     "csv-parser": "^3.0.0",
     "fast-csv": "^4.3.6",
+    "pkg": "^5.8.1",
     "readline-sync": "^1.4.10"
   }
 }
