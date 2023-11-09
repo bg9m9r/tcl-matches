@@ -30,18 +30,23 @@ const getMatches = async (team1Id, team2Id) => {
     console.log("uri: ", uri);
     const res = await axios.get(uri, {
       headers: { 
-        Referer: "https://www.ea.com", 
-        Host: "proclubs.ea.com", 
-        Origin: "https://www.ea.com",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0",
+        "Accept": "application/json",
+        "Accept-Language": "en-GB,en;q=0.5",
         "Accept-Encoding": "gzip, deflate, br",
-        Accept: "*/*"
+        "Origin": "https://www.ea.com",
+        "Referer": "https://www.ea.com/",
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-site",
+        "TE": "trailers"
     },
       timeout: 5000,
 
     });
     console.log("we got some data back!");
     const data = res.data;
-    
+    console.log(data)
 
     // the request is to retrieve matches played for a club.
     // we filter through matches and look for clubs using the ID that is mapped to the name
@@ -86,8 +91,7 @@ const getMatches = async (team1Id, team2Id) => {
                 : 0;
             var defPos = player.position === "defenseMen" ? 1 : 0;
 
-            // and finally, push the stats object to the global array. This could
-            // be done in a better way in C#
+            // and finally, push the stats object to the global array.
             matchStats.push({
               playername: player.playername,
               position: positions[player.position],
