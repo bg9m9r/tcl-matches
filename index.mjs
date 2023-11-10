@@ -26,8 +26,6 @@ const getMatches = async (team1Id, team2Id) => {
     // setup http request
     const uri = `https://proclubs.ea.com/api/nhl/clubs/matches?clubIds=${team1Id}&platform=${platform}&matchType=club_private`;
     // perform http request
-
-    console.log("uri: ", uri);
     const res = await axios.get(uri, {
       headers: { 
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0",
@@ -44,9 +42,7 @@ const getMatches = async (team1Id, team2Id) => {
       timeout: 5000,
 
     });
-    console.log("we got some data back!");
     const data = res.data;
-    console.log(data)
 
     // the request is to retrieve matches played for a club.
     // we filter through matches and look for clubs using the ID that is mapped to the name
@@ -259,4 +255,4 @@ const main = async () => {
   console.log("\nDone");
 };
 
-await main();
+main();
